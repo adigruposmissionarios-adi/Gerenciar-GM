@@ -42,8 +42,6 @@ async function fetchStats(): Promise<Stats> {
 
   if (gmError) throw gmError;
 
-  if (relError) throw relError;
-
   // 2) Relatórios enviados na semana corrente (Bypass 1000 records)
   const { start, end } = getCurrentWeekRange();
   let allRelatorios: any[] = [];
