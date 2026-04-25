@@ -322,14 +322,15 @@ function LoginScreen({
         </div>
       )}
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="flex h-12 items-center justify-center gap-2 rounded-xl bg-action-blue-strong font-bold text-action-foreground shadow-md transition hover:brightness-110 disabled:opacity-60"
-      >
-        {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <LogIn className="h-5 w-5" />}
-        {loading ? "Verificando…" : "Entrar"}
-      </button>
+      <div className="flex flex-col gap-3">
+        <button
+          type="submit"
+          disabled={loading}
+          className="flex h-14 items-center justify-center gap-2 rounded-xl bg-blue-600 text-lg font-bold text-white shadow-md transition hover:bg-blue-700 disabled:opacity-60"
+        >
+          {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : "Acessar Painel"}
+        </button>
+      </div>
     </form>
   );
 }

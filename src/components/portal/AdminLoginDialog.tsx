@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X, Lock, Check, Eraser } from "lucide-react";
+import { X, Lock } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 
 type AdminLoginDialogProps = {
@@ -109,21 +109,19 @@ export function AdminLoginDialog({ open, onClose }: AdminLoginDialogProps) {
             />
           </label>
 
-          <div className="flex gap-4 mt-4">
+          <div className="flex flex-col gap-3 mt-4">
             <button
               type="submit"
-              className="flex-1 flex h-14 items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 text-lg font-bold text-white shadow-md hover:bg-blue-700"
+              className="w-full flex h-14 items-center justify-center rounded-xl bg-blue-600 text-lg font-bold text-white shadow-md hover:bg-blue-700 active:scale-[0.98] transition-transform"
             >
-              <Check className="h-5 w-5" />
-              Confirmar
+              Confirmar Login
             </button>
             <button
               type="button"
               onClick={handleLimpar}
-              className="flex-1 flex h-14 items-center justify-center gap-2 rounded-xl bg-destructive px-4 text-lg font-bold text-white shadow-md transition-all hover:brightness-110"
+              className="w-full flex h-12 items-center justify-center rounded-xl border-2 border-slate-200 text-base font-bold text-slate-500 hover:bg-slate-50 active:scale-[0.98] transition-transform"
             >
-              <Eraser className="h-5 w-5" />
-              Limpar
+              Limpar Campos
             </button>
           </div>
         </form>
