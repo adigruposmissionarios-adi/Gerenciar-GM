@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { ArrowRight, Eye, UserPlus, RefreshCw, Send } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { CadastrarGMDialog } from "./CadastrarGMDialog";
@@ -45,7 +45,7 @@ const actions: Action[] = [
   },
 ];
 
-export function ActionButtons() {
+export const ActionButtons = memo(function ActionButtons() {
   const [acompanharOpen, setAcompanharOpen] = useState(false);
   const [cadastrarOpen, setCadastrarOpen] = useState(false);
   const [atualizarOpen, setAtualizarOpen] = useState(false);
@@ -93,7 +93,7 @@ export function ActionButtons() {
       {cadastrarOpen && (
         <CadastrarGMDialog
           open={cadastrarOpen}
-          onClose={() => setAcompanharOpen(false)}
+          onClose={() => setCadastrarOpen(false)}
         />
       )}
         
@@ -112,4 +112,4 @@ export function ActionButtons() {
       )}
     </>
   );
-}
+});

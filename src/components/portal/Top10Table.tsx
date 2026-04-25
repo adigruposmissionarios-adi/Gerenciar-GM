@@ -1,19 +1,21 @@
+import { memo, useMemo } from "react";
 import { Trophy } from "lucide-react";
 import { useTop10 } from "@/hooks/useTop10";
 
-export function Top10Table() {
+export const Top10Table = memo(function Top10Table() {
   const { data: rows, isLoading } = useTop10();
 
-  // Gerar label da semana atual (dom a sab)
-  const now = new Date();
-  const dow = now.getDay();
-  const sunday = new Date(now);
-  sunday.setDate(now.getDate() - dow);
-  const saturday = new Date(sunday);
-  saturday.setDate(sunday.getDate() + 6);
-  const fmt = (d: Date) =>
-    `${String(d.getDate()).padStart(2, "0")}/${String(d.getMonth() + 1).padStart(2, "0")}`;
-  const weekLabel = `(${fmt(sunday)} a ${fmt(saturday)})`;
+  const weekLabel = useMemo(() => {
+    const now = new Date();
+    const dow = now.getDay();
+    const sunday = new Date(now);
+    sunday.setDate(now.getDate() - dow);
+    const saturday = new Date(sunday);
+    saturday.setDate(sunday.getDate() + 6);
+    const fmt = (d: Date) =>
+      `${String(d.getDate()).padStart(2, "0")}/${String(d.getMonth() + 1).padStart(2, "0")}`;
+    return `(${fmt(sunday)} a ${fmt(saturday)})`;
+  }, []);
 
   return (
     <section
@@ -111,4 +113,4 @@ export function Top10Table() {
       </div>
     </section>
   );
-}
+});

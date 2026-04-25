@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Users, CalendarCheck, HeartHandshake, Sparkles } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useStats } from "@/hooks/useStats";
@@ -46,7 +47,7 @@ const statConfigs: StatConfig[] = [
   },
 ];
 
-export function StatsCards() {
+export const StatsCards = memo(function StatsCards() {
   const { data: stats, isLoading } = useStats();
 
   return (
@@ -79,4 +80,4 @@ export function StatsCards() {
       })}
     </section>
   );
-}
+});
