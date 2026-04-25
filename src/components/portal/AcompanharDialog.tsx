@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import {
   X,
   Eye,
@@ -230,13 +230,16 @@ function LoginScreen({
   onLoginSupervisor: (info: SupervisorInfo) => void;
   onLoginLider: (gm: LiderInfo) => void;
 }) {
-  const [area, setArea] = useState("");
-  const [codigo, setCodigo] = useState("");
+  const areaRef = useRef<HTMLSelectElement>(null);
+  const codigoRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const area = areaRef.current?.value;
+    const codigo = codigoRef.current?.value || "";
+
     if (!area || !codigo.trim()) return;
     setLoading(true);
     setError("");
@@ -288,8 +291,8 @@ function LoginScreen({
         <div className="relative">
           <select
             required
-            value={area}
-            onChange={(e) => setArea(e.target.value)}
+            ref={areaRef}
+            defaultValue=""
             className="h-12 w-full appearance-none rounded-xl border border-border/80 bg-surface px-4 pr-10 text-sm text-foreground outline-none transition focus:border-action-blue-strong focus:ring-2 focus:ring-action-blue-strong/20"
           >
             <option value="" disabled>Selecione a área…</option>
@@ -306,11 +309,11 @@ function LoginScreen({
         </span>
         <input
           required
+          ref={codigoRef}
           type="text"
-          value={codigo}
-          onChange={(e) => setCodigo(e.target.value)}
           placeholder="Código do supervisor ou CPF do líder"
           autoComplete="off"
+          spellCheck={false}
           className="h-12 w-full rounded-xl border border-slate-300 bg-slate-50 px-4 text-base text-slate-900 outline-none focus:border-blue-500"
         />
       </label>
