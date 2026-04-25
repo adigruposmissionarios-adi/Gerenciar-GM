@@ -49,15 +49,15 @@ export function AdminLoginDialog({ open, onClose }: AdminLoginDialogProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/75 animate-in fade-in duration-200"
+        className="absolute inset-0 bg-black/80"
         onClick={handleClose}
       />
 
       {/* Dialog */}
-      <div className="relative z-10 flex w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl animate-in zoom-in-95 slide-in-from-bottom-4 duration-300">
+      <div className="relative z-10 flex w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
         
         {/* Header / Title */}
-        <div className="relative pt-10 pb-6 px-8 text-center border-b border-border/50">
+        <div className="relative pt-10 pb-6 px-8 text-center border-b border-slate-100">
           <button
             onClick={handleClose}
             className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-surface-muted text-muted-foreground hover:bg-surface hover:text-foreground transition-colors"
@@ -87,27 +87,32 @@ export function AdminLoginDialog({ open, onClose }: AdminLoginDialogProps) {
             <input
               type="text"
               value={login}
-              onChange={(e) => setLogin(e.target.value.toUpperCase())}
-              placeholder="seu_login"
-              className="h-12 w-full rounded-xl border border-border/80 bg-surface px-4 text-base text-foreground placeholder:text-muted-foreground/50 outline-none transition-all focus:border-action-blue-strong focus:ring-2 focus:ring-action-blue-strong/20"
+              onChange={(e) => setLogin(e.target.value)}
+              placeholder="Digite seu login"
+              spellCheck={false}
+              autoComplete="off"
+              className="h-12 w-full rounded-xl border border-slate-300 bg-slate-50 px-4 text-base text-slate-900 outline-none focus:border-blue-500"
             />
           </label>
 
           <label className="flex flex-col gap-2 relative">
-            <span className="text-base font-bold text-foreground">Código</span>
+            <span className="text-base font-bold text-slate-900">Código</span>
             <input
-              type="password"
+              required
+              type="text"
               value={codigo}
               onChange={(e) => setCodigo(e.target.value)}
-              placeholder="******"
-              className="h-12 w-full rounded-xl border border-border/80 bg-surface px-4 text-base text-foreground placeholder:text-muted-foreground/50 outline-none transition-all focus:border-action-blue-strong focus:ring-2 focus:ring-action-blue-strong/20"
+              placeholder="Código ou CPF"
+              autoComplete="off"
+              spellCheck={false}
+              className="h-12 w-full rounded-xl border border-slate-300 bg-slate-50 px-4 text-base text-slate-900 outline-none focus:border-blue-500"
             />
           </label>
 
           <div className="flex gap-4 mt-4">
             <button
               type="submit"
-              className="flex-1 flex h-14 items-center justify-center gap-2 rounded-xl bg-action-green px-4 text-lg font-bold text-white shadow-md transition-all hover:brightness-110"
+              className="flex-1 flex h-14 items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 text-lg font-bold text-white shadow-md hover:bg-blue-700"
             >
               <Check className="h-5 w-5" />
               Confirmar

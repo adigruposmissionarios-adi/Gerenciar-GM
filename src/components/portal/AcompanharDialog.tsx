@@ -306,12 +306,12 @@ function LoginScreen({
         </span>
         <input
           required
-          type="password"
+          type="text"
           value={codigo}
           onChange={(e) => setCodigo(e.target.value)}
           placeholder="Código do supervisor ou CPF do líder"
           autoComplete="off"
-          className="h-12 rounded-xl border border-border/80 bg-surface px-4 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition focus:border-action-blue-strong focus:ring-2 focus:ring-action-blue-strong/20"
+          className="h-12 w-full rounded-xl border border-slate-300 bg-slate-50 px-4 text-base text-slate-900 outline-none focus:border-blue-500"
         />
       </label>
 
