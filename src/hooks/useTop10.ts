@@ -39,57 +39,26 @@ async function fetchTop10(): Promise<Top10Row[]> {
   const { start, end } = getCurrentWeekRange();
 
   const { data, error } = await supabase
-    .from("relatorios_semanais")
-    .select("nome_gm, nome_lider, congregacao, area_nome, decisao, reconciliacao, visitantes_nao_cristaos, grupos_missionarios(faixa_etaria)")
-    .gte("data_gm", start)
-    .lte("data_gm", end);
+    .rpc('get_top_10_gms', { 
+      start_date: start, 
+      end_date: end 
+    });
 
-  if (error) throw error;
-
-  const grouped = new Map<string, Top10Row>();
-
-  for (const row of data ?? []) {
-    const gmNome = row.nome_gm;
-    if (!gmNome) continue;
-
-    const faixa = row.grupos_missionarios as any;
-    const faixaEtaria = typeof faixa === 'object' && faixa !== null ? faixa.faixa_etaria : "—";
-
-    const existing = grouped.get(gmNome);
-
-    if (existing) {
-      existing.decisions += row.decisao ?? 0;
-      existing.reconciliations += row.reconciliacao ?? 0;
-      existing.visitantesNaoCristaos += row.visitantes_nao_cristaos ?? 0;
-    } else {
-      grouped.set(gmNome, {
-        gm: gmNome,
-        leader: row.nome_lider ?? "",
-        congregation: row.congregacao ?? "",
-        area: row.area_nome ?? "",
-        faixa_etaria: faixaEtaria ?? "—",
-        decisions: row.decisao ?? 0,
-        reconciliations: row.reconciliacao ?? 0,
-        visitantesNaoCristaos: row.visitantes_nao_cristaos ?? 0,
-      });
-    }
+  if (error) {
+    console.error("Erro ao buscar Top 10 otimizado:", error);
+    throw error;
   }
 
-  // Regra de Ordenação: 
-  // 1º Critério: Soma de (decisões + reconciliações) DESC
-  // 2º Critério: Visitantes não cristãos DESC (em caso de empate)
-  return Array.from(grouped.values())
-    .sort((a, b) => {
-      const somaA = a.decisions + a.reconciliations;
-      const somaB = b.decisions + b.reconciliations;
-
-      if (somaA !== somaB) {
-        return somaB - somaA;
-      }
-      // Se empatar, vence quem levou mais visitantes não cristãos
-      return b.visitantesNaoCristaos - a.visitantesNaoCristaos;
-    })
-    .slice(0, 10);
+  return (data ?? []).map(r => ({
+    gm: r.gm,
+    leader: r.leader,
+    congregation: r.congregation,
+    area: r.area,
+    faixa_etaria: r.faixa_etaria || "—",
+    decisions: Number(r.decisions),
+    reconciliations: Number(r.reconciliations),
+    visitantesNaoCristaos: Number(r.visitantes_nao_cristaos)
+  }));
 }
 
 export function useTop10() {

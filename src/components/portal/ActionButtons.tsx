@@ -83,25 +83,33 @@ export function ActionButtons() {
         })}
       </section>
 
-      <AcompanharDialog
-        open={acompanharOpen}
-        onClose={() => setAcompanharOpen(false)}
-      />
-
-      <CadastrarGMDialog
-        open={cadastrarOpen}
-        onClose={() => setCadastrarOpen(false)}
-      />
-      
-      <AtualizarGMDialog
-         open={atualizarOpen}
-         onClose={() => setAtualizarOpen(false)}
-      />
-
-      <EnviarRelatorioDialog
-        open={relatorioOpen}
-        onClose={() => setRelatorioOpen(false)}
-      />
+      {acompanharOpen && (
+        <AcompanharDialog
+          open={acompanharOpen}
+          onClose={() => setAcompanharOpen(false)}
+        />
+      )}
+  
+      {cadastrarOpen && (
+        <CadastrarGMDialog
+          open={cadastrarOpen}
+          onClose={() => setAcompanharOpen(false)}
+        />
+      )}
+        
+      {atualizarOpen && (
+        <AtualizarGMDialog
+           open={atualizarOpen}
+           onClose={() => setAtualizarOpen(false)}
+        />
+      )}
+  
+      {relatorioOpen && (
+        <EnviarRelatorioDialog
+          open={relatorioOpen}
+          onClose={() => setRelatorioOpen(false)}
+        />
+      )}
     </>
   );
 }

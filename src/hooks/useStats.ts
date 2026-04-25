@@ -35,44 +35,28 @@ export function getCurrentWeekRange(): { start: string; end: string } {
 }
 
 async function fetchStats(): Promise<Stats> {
-  // 1) Total de GMs cadastrados no sistema
-  const { count: totalGms, error: gmError } = await supabase
-    .from("grupos_missionarios")
-    .select("*", { count: "exact", head: true });
-
-  if (gmError) throw gmError;
-
-  // 2) Relatórios enviados na semana corrente (Bypass 1000 records)
   const { start, end } = getCurrentWeekRange();
-  let allRelatorios: any[] = [];
-  let fromRel = 0;
-  const pageSizeRel = 1000;
 
-  while (true) {
-    const { data: relatorios, error: relError } = await supabase
-      .from("relatorios_semanais")
-      .select("decisao, reconciliacao")
-      .gte("data_gm", start)
-      .lte("data_gm", end)
-      .range(fromRel, fromRel + pageSizeRel - 1);
+  // Chama a função otimizada no servidor
+  const { data, error } = await supabase
+    .rpc('get_weekly_stats', { 
+      start_date: start, 
+      end_date: end 
+    });
 
-    if (relError) throw relError;
-    if (!relatorios || relatorios.length === 0) break;
-
-    allRelatorios.push(...relatorios);
-    if (relatorios.length < pageSizeRel) break;
-    fromRel += pageSizeRel;
+  if (error) {
+    console.error("Erro ao buscar stats otimizadas:", error);
+    throw error;
   }
 
-  const reunioesSemana        = allRelatorios.length;
-  const decisoesSemana        = allRelatorios.reduce((acc, r) => acc + (r.decisao        ?? 0), 0) ?? 0;
-  const reconciliacoesSemana  = allRelatorios.reduce((acc, r) => acc + (r.reconciliacao  ?? 0), 0) ?? 0;
+  // A função retorna um array com um objeto
+  const result = data[0];
 
   return {
-    totalGms:              totalGms ?? 0,
-    reunioesSemana,
-    decisoesSemana,
-    reconciliacoesSemana,
+    totalGms:              Number(result.total_gms)            ?? 0,
+    reunioesSemana:        Number(result.reunioes_semana)      ?? 0,
+    decisoesSemana:        Number(result.decisoes_semana)      ?? 0,
+    reconciliacoesSemana:  Number(result.reconciliacoes_semana)?? 0,
   };
 }
 

@@ -10,8 +10,10 @@ export function BannerHeader() {
         <div className="relative w-full" style={{ aspectRatio: '3 / 1' }}>
           <img 
             key={bannerUrl}
-            src={`${bannerUrl}?v=${Date.now()}`} 
+            src={bannerUrl} 
             alt="Banner Principal" 
+            loading="eager"
+            decoding="async"
             className="absolute inset-0 w-full h-full object-cover object-center animate-in fade-in duration-700"
           />
         </div>
@@ -32,15 +34,15 @@ export function BannerHeader() {
         ADI
       </div>
 
-      {/* Decorative world map (top-right) */}
+      {/* Decorative world map (top-right) - Optimized for mobile (fewer points) */}
       <svg
         aria-hidden
         viewBox="0 0 800 400"
         className="pointer-events-none absolute -right-10 -top-10 h-64 w-[28rem] text-gold-deep/25 sm:h-80 sm:w-[36rem]"
         fill="currentColor"
       >
-        {Array.from({ length: 380 }).map((_, i) => {
-          const x = (i * 53) % 800;
+        {Array.from({ length: 120 }).map((_, i) => {
+          const x = (i * 167) % 800;
           const y = (i * 97) % 400;
           const r = ((i % 5) + 1) * 0.9;
           return <circle key={i} cx={x} cy={y} r={r} />;
