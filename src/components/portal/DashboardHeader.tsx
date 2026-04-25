@@ -27,10 +27,12 @@ export function DashboardHeader() {
         </Button>
       </section>
 
-      <AdminLoginDialog 
-        open={adminOpen} 
-        onClose={() => setAdminOpen(false)} 
-      />
+      {adminOpen && (
+        <AdminLoginDialog 
+          open={adminOpen} 
+          onClose={() => setAdminOpen(false)} 
+        />
+      )}
     </>
   );
 }

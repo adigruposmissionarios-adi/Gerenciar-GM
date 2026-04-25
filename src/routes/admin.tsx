@@ -282,12 +282,29 @@ function AdminPage() {
 
       </main>
 
-      <RelatorioSetorDialog open={setorOpen} onClose={() => setSetorOpen(false)} />
-      <RelatorioCompletoDialog open={completosOpen} onClose={() => setCompletosOpen(false)} />
-      <MenorDesempenhoDialog open={desempenhoOpen} onClose={() => setDesempenhoOpen(false)} />
-      <RelatorioFrutosDialog open={frutosOpen} onClose={() => setFrutosOpen(false)} />
-      <GerenciarGMsDialog open={gerenciarOpen} onClose={() => setGerenciarOpen(false)} />
-      <ConfiguracoesDialog open={configOpen} onClose={() => setConfigOpen(false)} />
+      {setorOpen && (
+        <RelatorioSetorDialog open={setorOpen} onClose={() => setSetorOpen(false)} />
+      )}
+      
+      {completosOpen && (
+        <RelatorioCompletoDialog open={completosOpen} onClose={() => setCompletosOpen(false)} />
+      )}
+      
+      {desempenhoOpen && (
+        <MenorDesempenhoDialog open={desempenhoOpen} onClose={() => setDesempenhoOpen(false)} />
+      )}
+      
+      {frutosOpen && (
+        <RelatorioFrutosDialog open={frutosOpen} onClose={() => setFrutosOpen(false)} />
+      )}
+      
+      {gerenciarOpen && (
+        <GerenciarGMsDialog open={gerenciarOpen} onClose={() => setGerenciarOpen(false)} />
+      )}
+      
+      {configOpen && (
+        <ConfiguracoesDialog open={configOpen} onClose={() => setConfigOpen(false)} />
+      )}
     </div>
   );
 }

@@ -108,12 +108,18 @@ export function GerenciarGMsDialog({ open, onClose }: GerenciarGMsDialogProps) {
 
   // Lógica de Filtragem Local para resposta instantânea
   const filteredGms = useMemo(() => {
+    const searchTerm = filters.search.toLowerCase();
+    
+    // Calcula as áreas do setor uma única vez antes de filtrar os GMs
+    const areasDoSetor = filters.setor !== "Todos" 
+      ? areas.filter(a => a.setor_nome === filters.setor).map(a => a.nome) 
+      : null;
+
     return gms.filter(gm => {
-      const matchesSearch = !filters.search || 
-        gm.nome.toLowerCase().includes(filters.search.toLowerCase()) ||
-        gm.lider.toLowerCase().includes(filters.search.toLowerCase());
+      const matchesSearch = !searchTerm || 
+        gm.nome.toLowerCase().includes(searchTerm) ||
+        gm.lider.toLowerCase().includes(searchTerm);
       
-      const areasDoSetor = filters.setor !== "Todos" ? areas.filter(a => a.setor_nome === filters.setor).map(a => a.nome) : null;
       const matchesSetor = filters.setor === "Todos" || (areasDoSetor?.includes(gm.area_nome || ""));
       
       const matchesArea = filters.area === "Todas" || gm.area_nome === filters.area;
