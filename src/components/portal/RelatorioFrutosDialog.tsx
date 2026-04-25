@@ -94,6 +94,7 @@ export function RelatorioFrutosDialog({ open, onClose }: RelatorioFrutosDialogPr
 
   const faixas = ["Kids", "Teens", "Jovem", "Adultos", "Misto"];
 
+  const handleExportCSV = (list: GMFrutoConsolidados[], filename: string) => {
     const escapeCSV = (val: any) => {
       const s = String(val ?? "");
       if (s.includes(",") || s.includes('"') || s.includes("\n")) {
