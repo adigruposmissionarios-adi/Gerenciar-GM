@@ -146,7 +146,7 @@ export function AcompanharDialog({ open, onClose }: AcompanharDialogProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto p-3 sm:items-center sm:p-4">
-      <div className="fixed inset-0 bg-black/65 backdrop-blur-sm" onClick={handleClose} />
+      <div className="fixed inset-0 bg-black/80" onClick={handleClose} />
 
       <div className="relative z-10 my-4 flex w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-white/10 bg-card shadow-2xl ring-1 ring-black/5">
         {/* ── Header ── */}

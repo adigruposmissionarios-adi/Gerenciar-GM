@@ -282,7 +282,7 @@ export function EnviarRelatorioDialog({
     <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto p-3 sm:items-center sm:p-4">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/65 backdrop-blur-sm"
+        className="fixed inset-0 bg-black/80"
         onClick={handleClose}
       />
 

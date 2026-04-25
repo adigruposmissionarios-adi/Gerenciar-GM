@@ -157,7 +157,7 @@ export function GerenciarGMsDialog({ open, onClose }: GerenciarGMsDialogProps) {
   return (
     <>
       <div className="fixed inset-0 z-[120] flex items-center justify-center p-4">
-        <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-md" onClick={onClose} />
+        <div className="absolute inset-0 bg-slate-900/90" onClick={onClose} />
         
         <div className="relative w-full max-w-7xl h-[92vh] bg-white rounded-[40px] shadow-2xl border border-slate-200 overflow-hidden flex flex-col scale-in-center">
           
