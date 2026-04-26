@@ -155,7 +155,7 @@ export function AcompanharDialog({ open, onClose }: AcompanharDialogProps) {
           style={{ background: "var(--gradient-banner)" }}
         >
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-gold-deep/30 bg-white/70 shadow backdrop-blur-sm sm:h-11 sm:w-11">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-gold-deep/30 bg-white shadow sm:h-11 sm:w-11">
               <Eye className="h-5 w-5 text-gold-deep" />
             </div>
             <div>

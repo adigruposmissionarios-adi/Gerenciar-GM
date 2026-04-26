@@ -448,7 +448,7 @@ export function GerenciarGMsDialog({ open, onClose }: GerenciarGMsDialogProps) {
       {/* Modal Visualização Detalhada */}
       {viewGM && (
         <div className="fixed inset-0 z-[130] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setViewGM(null)} />
+          <div className="absolute inset-0 bg-black/75" onClick={() => setViewGM(null)} />
           <div className="relative w-full max-w-2xl bg-white rounded-[40px] shadow-2xl p-10 overflow-hidden animate-in zoom-in-95 duration-300">
             <button onClick={() => setViewGM(null)} className="absolute top-8 right-8 p-2 hover:bg-slate-100 rounded-xl text-slate-400"><X /></button>
             <div className="flex items-center gap-5 mb-8">
@@ -506,7 +506,7 @@ export function GerenciarGMsDialog({ open, onClose }: GerenciarGMsDialogProps) {
       {/* Modal Confirmação Exclusão */}
       {deleteGM && (
         <div className="fixed inset-0 z-[140] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-md" />
+          <div className="absolute inset-0 bg-black/80" />
           <div className="relative w-full max-w-md bg-white rounded-[40px] shadow-2xl p-10 text-center animate-in zoom-in-95 duration-200">
             <div className="w-20 h-20 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
               <AlertTriangle className="w-10 h-10" />

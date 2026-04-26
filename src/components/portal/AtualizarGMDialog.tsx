@@ -231,7 +231,7 @@ export function AtualizarGMDialog({ open, onClose }: AtualizarGMDialogProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
+        className="absolute inset-0 bg-black/80"
         onClick={handleClose}
       />
 
@@ -243,7 +243,7 @@ export function AtualizarGMDialog({ open, onClose }: AtualizarGMDialogProps) {
           style={{ background: "var(--gradient-banner)" }}
         >
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full border-2 border-gold-deep/30 bg-white/70 shadow-md backdrop-blur-sm">
+            <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full border-2 border-gold-deep/30 bg-white shadow-md">
               <RefreshCw className="h-5 w-5 sm:h-6 sm:w-6 text-gold-deep" />
             </div>
             <div>

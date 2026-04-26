@@ -62,7 +62,7 @@ export const StatsCards = memo(function StatsCards() {
             style={{ boxShadow: "var(--shadow-card)" }}
           >
             <div
-              className={`absolute -right-6 -top-6 h-20 w-20 sm:-right-8 sm:-top-8 sm:h-28 sm:w-28 rounded-full ${s.accent} blur-sm transition-transform group-hover:scale-110`}
+              className={`absolute -right-6 -top-6 h-20 w-20 sm:-right-8 sm:-top-8 sm:h-28 sm:w-28 rounded-full ${s.accent} transition-transform group-hover:scale-110`}
               aria-hidden
             />
             <div className="relative flex items-start justify-between">
