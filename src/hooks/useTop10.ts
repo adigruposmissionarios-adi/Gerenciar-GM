@@ -67,5 +67,6 @@ export function useTop10() {
     queryFn: fetchTop10,
     staleTime: 1000 * 60 * 2,
     refetchInterval: 1000 * 60 * 2,
+    retry: false,
   });
 }
