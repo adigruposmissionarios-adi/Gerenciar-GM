@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { BannerHeader } from "@/components/portal/BannerHeader";
 import { DashboardHeader } from "@/components/portal/DashboardHeader";
@@ -21,41 +20,16 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const [activeDialog, setActiveDialog] = useState<string | null>(null);
-
-  // Se houver qualquer Dialog aberto, "limpamos" a tela para performance maxima
-  const anyDialogOpen = activeDialog !== null;
-
   return (
     <div className="min-h-screen bg-white">
-      {/* Ocultamos o Banner se algo estiver aberto */}
-      {!anyDialogOpen && <BannerHeader />}
+      <BannerHeader />
 
       <main className="mx-auto max-w-6xl px-4 py-8">
         <div className="flex flex-col gap-10">
-          <DashboardHeader 
-            onOpenLogin={() => setActiveDialog("admin")} 
-            activeDialog={activeDialog}
-            onClose={() => setActiveDialog(null)}
-          />
-          
-          {!anyDialogOpen ? (
-            <>
-              <StatsCards />
-              <ActionButtons 
-                onOpenDialog={(id) => setActiveDialog(id)}
-              />
-              <Top10Table />
-            </>
-          ) : (
-            <div className="py-20 text-center">
-              <ActionButtons 
-                onOpenDialog={(id) => setActiveDialog(id)}
-                activeDialog={activeDialog}
-                onClose={() => setActiveDialog(null)}
-              />
-            </div>
-          )}
+          <DashboardHeader />
+          <StatsCards />
+          <ActionButtons />
+          <Top10Table />
         </div>
       </main>
 
