@@ -2,43 +2,53 @@ import { memo } from "react";
 
 export const BannerHeader = memo(function BannerHeader() {
   return (
-    <header className="relative w-full overflow-hidden bg-slate-900 px-4 py-20 pb-32 sm:py-28 sm:pb-40">
-      {/* Background Decorativo - Camadas de Identidade */}
+    <header className="relative w-full overflow-hidden bg-[#fafafa] px-4 py-20 pb-32 sm:py-28 sm:pb-40 border-b border-slate-100">
+      {/* Elementos Decorativos de Fundo - Estilo Painel Administrativo */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Mapa Mundial sutil */}
-        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/world-map.png')] bg-center bg-no-repeat" />
-        
-        {/* Watermark ADI Gigante */}
-        <div className="absolute -top-12 left-1/2 -z-10 -translate-x-1/2 select-none text-[8rem] font-black text-white/[0.03] sm:text-[14rem] md:text-[20rem]">
+        {/* Watermark ADI Gigante - Sutil em Cinza/Dourado claro */}
+        <div className="absolute -top-12 left-0 -z-10 select-none text-[10rem] font-black text-slate-200/40 sm:text-[18rem] md:text-[24rem] leading-none">
           ADI
         </div>
         
-        {/* Gradients de profundidade */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-slate-900" />
+        {/* Mapa Mundial à Direita - Como na imagem das configurações */}
+        <div className="absolute right-0 top-0 bottom-0 w-1/2 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/world-map.png')] bg-right bg-no-repeat bg-contain" />
+        
+        {/* Vinheta lateral para suavizar o mapa */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#fafafa] via-[#fafafa]/80 to-transparent" />
       </div>
 
-      <div className="relative mx-auto max-w-4xl text-center">
-        <div className="mx-auto mb-10 flex h-20 w-20 items-center justify-center rounded-3xl bg-white shadow-[0_0_50px_rgba(255,255,255,0.2)] sm:h-28 sm:w-28">
+      <div className="relative mx-auto max-w-5xl text-center">
+        {/* Logo ADI - Com borda sutil */}
+        <div className="mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-[2rem] bg-white shadow-xl border border-slate-50 sm:h-32 sm:w-32">
           <img
             src="/adi-logo.png"
             alt="ADI Logo"
-            className="h-14 w-14 object-contain sm:h-20 sm:w-20"
+            className="h-16 w-16 object-contain sm:h-22 sm:w-22"
             onError={(e) => {
-              e.currentTarget.src = "https://placeholder.com/100";
+              e.currentTarget.src = "https://placeholder.com/150";
             }}
           />
         </div>
 
-        <h1 className="text-4xl font-black tracking-tighter text-white sm:text-6xl md:text-7xl">
-          GRUPOS <span className="text-blue-500">MISSIONÁRIOS</span>
+        {/* Tipografia em Tons de Dourado/Escuro para combinar com o banner do admin */}
+        <h1 className="flex flex-col gap-2 text-5xl font-black tracking-tighter text-slate-900 sm:text-7xl md:text-8xl">
+          <span className="text-slate-800">GRUPOS</span>
+          <span className="bg-gradient-to-r from-[#A88B45] to-[#D4AF37] bg-clip-text text-transparent uppercase">
+            Missionários
+          </span>
         </h1>
-        <p className="mx-auto mt-6 max-w-lg text-lg font-bold uppercase tracking-[0.2em] text-slate-400 sm:text-xl">
-          Gerenciar <span className="mx-2 text-slate-600">•</span> Calcular <span className="mx-2 text-slate-600">•</span> Enviar
-        </p>
+        
+        <div className="mx-auto mt-8 flex items-center justify-center gap-2 text-sm font-black uppercase tracking-[0.3em] text-slate-500 sm:text-lg">
+          <span>GANHAR</span>
+          <span className="h-1.5 w-1.5 rounded-full bg-slate-300" />
+          <span>DISCIPULAR</span>
+          <span className="h-1.5 w-1.5 rounded-full bg-slate-300" />
+          <span>ENVIAR</span>
+        </div>
       </div>
       
-      {/* Detalhe de curva inferior para suavizar a transicao */}
-      <div className="absolute bottom-0 left-0 h-16 w-full bg-gradient-to-t from-white to-transparent" />
+      {/* Detalhe inferior de profundidade */}
+      <div className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-white to-transparent" />
     </header>
   );
 });
