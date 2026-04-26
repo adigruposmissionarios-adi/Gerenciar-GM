@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { BannerHeader } from "@/components/portal/BannerHeader";
 import { DashboardHeader } from "@/components/portal/DashboardHeader";
@@ -20,23 +21,46 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  return (
-    <div className="min-h-screen bg-surface">
-      <BannerHeader />
+  const [activeDialog, setActiveDialog] = useState<string | null>(null);
 
-      <main className="mx-auto max-w-6xl px-3 py-6 sm:px-6 sm:py-10 lg:py-12">
-        <div className="flex flex-col gap-6 sm:gap-8 lg:gap-10">
-          <DashboardHeader />
-          <StatsCards />
-          <ActionButtons />
-          <Top10Table />
+  // Se houver qualquer Dialog aberto, "limpamos" a tela para performance maxima
+  const anyDialogOpen = activeDialog !== null;
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Ocultamos o Banner se algo estiver aberto */}
+      {!anyDialogOpen && <BannerHeader />}
+
+      <main className="mx-auto max-w-6xl px-4 py-8">
+        <div className="flex flex-col gap-10">
+          <DashboardHeader 
+            onOpenLogin={() => setActiveDialog("admin")} 
+            activeDialog={activeDialog}
+            onClose={() => setActiveDialog(null)}
+          />
+          
+          {!anyDialogOpen ? (
+            <>
+              <StatsCards />
+              <ActionButtons 
+                onOpenDialog={(id) => setActiveDialog(id)}
+              />
+              <Top10Table />
+            </>
+          ) : (
+            <div className="py-20 text-center">
+              <ActionButtons 
+                onOpenDialog={(id) => setActiveDialog(id)}
+                activeDialog={activeDialog}
+                onClose={() => setActiveDialog(null)}
+              />
+            </div>
+          )}
         </div>
       </main>
 
-      <footer className="border-t border-border/60 bg-card/60">
-        <div className="mx-auto max-w-6xl px-6 py-6 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} ADI Grupos Missionários — Ganhar, Discipular e Enviar.
-        </div>
+      <footer className="border-t border-slate-100 py-8 text-center text-xs text-slate-400">
+        © {new Date().getFullYear()} ADI Grupos Missionários — Ganhar, Discipular e Enviar.
       </footer>
     </div>
   );
